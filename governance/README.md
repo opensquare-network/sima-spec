@@ -308,11 +308,24 @@ Above is an array of CIDs of user signed action data. Its CID
 is `bafybeihylrppf3ufj7dbgdlfyd4vh4dlwnvqlizkjimetxiymhollsf2ka`. Spec implementer will submit this CID to blockchain
 with `system#remark` extrinsic. The argument should be:
 
-`0x{bytes(SIMA:1:S:{CID_of_user_signed_action_data_CID_array})}`
+`0x{bytes(SIMA:G:1:S:{CID_of_user_signed_action_data_CID_array})}`
 
-In the above example, it should be `0x{bytes(SIMA:1:S:bafybeihylrppf3ufj7dbgdlfyd4vh4dlwnvqlizkjimetxiymhollsf2ka)}`,
+In the above example, it should be `0x{bytes(SIMA:G:1:S:bafybeihylrppf3ufj7dbgdlfyd4vh4dlwnvqlizkjimetxiymhollsf2ka)}`,
 and its final value is
-`0x53494d413a313a533a6261667962656968796c727070663375666a37646267646c66796434766834646c776e76716c697a6b6a696d65747869796d686f6c6c7366326b61`.
+`0x53494d413a473a313a533a6261667962656968796c727070663375666a37646267646c66796434766834646c776e76716c697a6b6a696d65747869796d686f6c6c7366326b61`.
+
+As we can see, action data submission remark follows predefined rules in which several fields are separated by
+character `:`. Meaning of each field is described as follows.
+
+- SIMA: it indicates SIMA spec.
+- G: it indicates governance subsection in SIMA spec.
+- [version]: 1 in the example. it indicates the version of SIMA governance. The value will be different if a user uses a
+  different version.
+- S: a command of SIMA governance. Currently, we only has one command in SIMA spec, new commands maybe introduced in
+  future versions.
+- [CID field]: it should be the CID of user submission data. User submission data can be:
+    - an action object.
+    - an array of CIDs of action objects.
 
 ### Data recovery
 
