@@ -29,7 +29,7 @@ Blockchain governance enables token holders to decide the evolution of a chain. 
 holders will vote based on token balance in normal cases. Usually governance participators will have discussions in
 a forum, and leave their comments with a web2 registered account. These discussions data will be saved in the forum host
 database which is hard to be verified by third parties and easy to be tampered with. SIMA governance defines a set rules
-to help users decentralize the off-chain discussion data. Details can be checked [here](./governance/README.md).
+to help users decentralize the off-chain discussion data. Details can be checked [here](governance/v1/README.md).
 
 ## Avatar Settings
 
