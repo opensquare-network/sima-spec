@@ -123,6 +123,13 @@ Action object is a JSON object describing a user's action. An action object will
 
 We will describe entities for various actions in following sections.
 
+### Authority
+
+- If it's a multisig account who propose an on-chain proposal, anyone of the signatories can provide context for the
+  proposal. Of course the context can also be provided by multisig calls.
+- If an account has proxies, one of the proxy accounts can provide actions on behalf of the account with a `proxy#proxy`
+  call.
+
 ### Start a discussion
 
 Any community member with a polkadot key can start a discussion. An example of the action data to be signed is shown as
