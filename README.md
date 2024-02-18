@@ -12,7 +12,7 @@ SIMA is named after [Sima Qian](https://en.wikipedia.org/wiki/Sima_Qian), one of
 
 ## Text Format
 
-SIMA uses plain text to represent users actions which are categorized into different subsections. A common SIMA text is
+SIMA uses plain text to represent user actions which are categorized into different subsections. A common SIMA text is
 `SIMA:[SUB_SECTION]:[VERSION]:[COMMAND]:[ARGS]`.
 
 - SIMA: it indicates SIMA spec. We need this to differentiate from remark text of other specs.
