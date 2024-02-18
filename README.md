@@ -36,7 +36,7 @@ to help users decentralize the off-chain discussion data. Details can be checked
 Polkadot has an identity pallet with which user can set specified and customized fields, and the community can know the
 verification status by judgements from registrars. Though avatar settings can be achieved by customized fields with
 identity pallet. It will be troublesome for users to do update because every update will require another registrar's
-judgement.
+judgement. Details can be checked [here](avatar/v1/README.md).
 
 ## Delegation Announcements
 
