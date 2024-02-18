@@ -12,7 +12,7 @@ SIMA is named after [Sima Qian](https://en.wikipedia.org/wiki/Sima_Qian), one of
 
 ## Text Format
 
-SIMA uses plain text to represent users actions which are categorized into different subsections. A common SIMA text is
+SIMA uses plain text to represent user actions which are categorized into different subsections. A common SIMA text is
 `SIMA:[SUB_SECTION]:[VERSION]:[COMMAND]:[ARGS]`.
 
 - SIMA: it indicates SIMA spec. We need this to differentiate from remark text of other specs.
@@ -36,7 +36,7 @@ to help users decentralize the off-chain discussion data. Details can be checked
 Polkadot has an identity pallet with which user can set specified and customized fields, and the community can know the
 verification status by judgements from registrars. Though avatar settings can be achieved by customized fields with
 identity pallet. It will be troublesome for users to do update because every update will require another registrar's
-judgement.
+judgement. Details can be checked [here](avatar/v1/README.md).
 
 ## Delegation Announcements
 
