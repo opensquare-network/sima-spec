@@ -42,4 +42,4 @@ judgement. Details can be checked [here](avatar/v1/README.md).
 
 Delegation is an important way to increase governance participation. To attract more token holders, delegates can make
 some announcement or description about their authority or policy to vote, but currently users can only submit this
-information to centralized entities.
+information to centralized entities. Details can be checked [here](delegation/v1/README.md).
