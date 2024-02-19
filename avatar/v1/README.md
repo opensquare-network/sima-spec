@@ -14,7 +14,7 @@ align users' avatar related behaviours on web2 sites, this spec propose a way to
 Users will submit a `system#remark` extrinsic to set an avatar, and the remark format is `SIMA:A:[VERSION]:S:[IMG_CID]`.
 
 - SIMA: it indicates SIMA spec.
-- A: it indicates avatar subsection in SIMA spec.
+- A: it indicates the avatar subsection in SIMA spec.
 - [version]: 1 for example. it indicates the version of SIMA avatar. The value will be different if a user uses a
   different version.
 - S: it means submission, and an image cid will be followed.
