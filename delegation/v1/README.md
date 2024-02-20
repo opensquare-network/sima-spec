@@ -23,10 +23,23 @@ is `SIMA:D:[VERSION]:S:[DESCRIPTION_OBJECT_CID]`.
 - S: it means submission, and a description json object cid will be followed.
 - DESCRIPTION_OBJECT_CID: it indicates the delegation description JSON object CID.
 
-### Notes
+## Unset
+
+Users will submit a `system#remark` extrinsic to cancel the delegation announcement, and the remark format
+is `SIMA:D:[VERSION]:U`.
+
+- SIMA: it indicates SIMA spec.
+- D: it indicates the delegation subsection in SIMA spec.
+- [version]: 1 for example. it indicates the version of SIMA delegation. The value will be different if a user uses a
+  different version.
+- U: it means unset current delegation announcement. This command will take no effect if the extrinsic caller didn't
+  publish any announcements before.
+
+## Notes
 
 - If an account has proxies, one of the proxy accounts can provide submissions on behalf of the account with
   a `proxy#proxy` call.
 - If the remark call is wrapped in a multisig call, the delegation announcements will be set to the multisig account.
 - If the resource identified by the `DESCRIPTION_OBJECT_CID` is not a valid JSON object or doesn't contain required
   fields, the delegation announcement settings will be invalid.
+- A new delegation announcement will take place of the old one.
