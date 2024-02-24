@@ -13,15 +13,15 @@ SIMA is named after [Sima Qian](https://en.wikipedia.org/wiki/Sima_Qian), one of
 ## Text Format
 
 SIMA uses plain text to represent user actions which are categorized into different subsections. A common SIMA text is
-`SIMA:[SUB_SECTION]:[VERSION]:[COMMAND]:[ARGS]`.
+`SIMA:[SUB_SECTION]:[VERSION]:[DIRECTIVE]:[ARGS]`.
 
 - SIMA: it indicates SIMA spec. We need this to differentiate from remark text of other specs.
 - SUB_SECTION: subsection of SIMA spec. It is an enum value. Currently, it includes `G` for governance, `A` for avatar
   settings, `D` for delegation announcements.
-- VERSION: version of SIMA subsections.
-- COMMAND: command of SIMA subsections. It depends on definitions of each subsection.
-- ARGS: command args of SIMA subsections. They will be different by different commands, but usually it will just be a
-  CID of a JSON data in which there are data presenting user actions.
+- VERSION: version of the SIMA subsection.
+- DIRECTIVE: directive of the SIMA subsection. It depends on definitions of each subsection.
+- ARGS: directive args of SIMA subsections. They will be different by different directives, but usually it will just be
+  a CID of a JSON data in which there are data presenting user actions.
 
 ## Governance Discussions
 

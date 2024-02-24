@@ -28,7 +28,7 @@ Users will submit a `system#remark` extrinsic to unset an avatar, and the remark
 - A: it indicates the avatar subsection in SIMA spec.
 - [version]: 1 for example. it indicates the version of SIMA avatar. The value will be different if a user uses a
   different version.
-- U: it means unset current avatar. This command will take no effect if the extrinsic caller don't have an avatar.
+- U: it means unset current avatar. This directive will take no effect if the extrinsic caller don't have an avatar.
 
 ### Notes
 

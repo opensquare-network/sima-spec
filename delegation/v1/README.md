@@ -32,7 +32,7 @@ is `SIMA:D:[VERSION]:U`.
 - D: it indicates the delegation subsection in SIMA spec.
 - [version]: 1 for example. it indicates the version of SIMA delegation. The value will be different if a user uses a
   different version.
-- U: it means unset current delegation announcement. This command will take no effect if the extrinsic caller didn't
+- U: it means unset current delegation announcement. This directive will take no effect if the extrinsic caller didn't
   publish any announcements before.
 
 ## Notes

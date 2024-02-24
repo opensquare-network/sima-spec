@@ -328,7 +328,7 @@ character `:`. Meaning of each field is described as follows.
 - G: it indicates governance subsection in SIMA spec.
 - [version]: 1 in the example. it indicates the version of SIMA governance. The value will be different if a user uses a
   different version.
-- S: a command of SIMA governance. Currently, we only has one command in SIMA spec, new commands maybe introduced in
+- S: a directive of SIMA governance. Currently, we only has one command in SIMA spec, new commands maybe introduced in
   future versions.
 - [CID field]: it should be the CID of user submission data. User submission data can be:
     - an action object.
