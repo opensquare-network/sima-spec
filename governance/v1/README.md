@@ -108,7 +108,9 @@ Every action will have a unique id which will be used in the signed data, shown 
 | Provide context     | provide_context   |
 | Comment a proposal  | comment_proposal  |
 | Comment             | comment           |
+| Upvote a proposal   | upvote_proposal   |
 | Upvote              | upvote            |
+| Downvote a proposal | downvote_proposal |
 | Downvote            | downvote          |
 | Cancel upvote       | cancel_upvote     |
 | Cancel downvote     | cancel_downvote   |
@@ -268,10 +270,28 @@ Note:
 - SIMA spec don't support 3rd level comments which means we can leave a comment to a proposal or discussion comment, but
   not a comment of another comment.
 
+### Upvote/downvote a proposal
+
+This action's target is same with that of the `comment_proposal` action, and the target is an onchain proposal. An
+example entity is shown as follows.
+
+```jsonld=
+{
+  "action": "upvote_proposal",
+  "indexer": {
+    "pallet": "treasury",
+    "object": "proposals",
+    "proposed_height": 9438552,
+    "id": 100
+  },
+  "timestamp": 1680686606947
+}
+```
+
 ### Upvote/downvote
 
-This action's target is same with that of the comment action, and the target maybe a discussion, an onchain proposal or
-another comment. An example entity is shown as follows.
+This action's target is same with that of the comment action, and the target maybe a discussion or another comment. An
+example entity is shown as follows.
 
 ```jsonld=
 {
@@ -281,8 +301,7 @@ another comment. An example entity is shown as follows.
 }
 ```
 
-- cid: it indicates the target action this action is responding to. The target action can be a discussion, proposal
-  context, or a comment.
+- cid: it indicates the target action this action is responding to. The target action can be a discussion, or a comment.
 
 ### Cancel upvote/downvote
 
@@ -297,11 +316,12 @@ This action's target is same with that of upvote/downvote action. An example ent
 ```
 
 - `action` field can be `cancel_upvote` or `cancel_downvote`.
-- `cid` has same meaning and format with that of the `upvote/downvote` action.
+- `cid` means the corresponding upvote/downvote/upvote_proposal/downvote_proposal action cid.
 
 Note:
 
-- If there is no corresponding upvote/downvote for same target from same address, this action won't take any effect.
+- If there is no corresponding upvote/downvote/upvote_proposal/downvote_proposal for same target from same address, this
+  action won't take any effect.
 
 ## Decentralization
 
