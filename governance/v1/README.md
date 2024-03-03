@@ -106,6 +106,7 @@ Every action will have a unique id which will be used in the signed data, shown 
 | Start a discussion  | new_discussion    |
 | Append a discussion | append_discussion |
 | Provide context     | provide_context   |
+| Comment a proposal  | comment_proposal  |
 | Comment             | comment           |
 | Upvote              | upvote            |
 | Downvote            | downvote          |
@@ -225,10 +226,29 @@ Note:
 
 - A new valid action updating same proposal will override the content by previous actions.
 
+### Comment a proposal
+
+This action leaves a comment to an on-chain proposal. An example of this action entity data is shown as follows.
+
+```jsonld=
+{
+  "action": "comment_proposal",
+  "indexer": {
+    "pallet": "treasury",
+    "object": "proposals",
+    "proposed_height": 9438552,
+    "id": 100
+  },
+  "content": "proposal comment",
+  "content_format": "subsquare_md",
+  "timestamp": 1680615958881
+}
+```
+
 ### Comment
 
-The comment action leaves a comment to a discussion, a proposal or another comment. An example of this action entity
-data is shown as follows.
+The comment action leaves a comment to a discussion or another comment. An example of this action entity data is shown
+as follows.
 
 ```jsonld=
 {
@@ -240,8 +260,13 @@ data is shown as follows.
 }
 ```
 
-- cid: it indicates the target action this comment is responding to. The target action can be a discussion, proposal
-  context, or another comment.
+- cid: it indicates the target action this comment is responding to. The target action can be a discussion, or another
+  comment.
+
+Note:
+
+- SIMA spec don't support 3rd level comments which means we can leave a comment to a proposal or discussion comment, but
+  not a comment of another comment.
 
 ### Upvote/downvote
 
