@@ -22,7 +22,7 @@ other to sync the data, but there are still some problems with current model.
 3. Data should be more auditable. Currently, platforms don't save all the data modifications. User can modify the legacy
    leaved context, and the website will just show the context is updated, so users may not be able to see the old data
    which may include the proposal owner's commitments.
-4. The more one signle centralized governance platform own users' data, the less possibility another platform can
+4. The more one single centralized governance platform own users' data, the less possibility another platform can
    provide better solutions. We need a relatively decentralize data hosting solution which will not rely on single
    platforms or a dedicated group of people.
 5. Differences of different platforms' API data format make it hard to sync and adapt all other platforms' data.
@@ -126,9 +126,8 @@ We will describe entities for various actions in following sections.
 ### Authority
 
 - If it's a multisig account who propose an on-chain proposal, anyone of the signatories can provide context for the
-  proposal. Of course the context can also be provided by multisig calls.
-- If an account has proxies, one of the proxy accounts can provide actions on behalf of the account with a `proxy#proxy`
-  call.
+  proposal.
+- If an account has proxies, one of the proxy accounts can provide actions on behalf of the account.
 
 ### Start a discussion
 
