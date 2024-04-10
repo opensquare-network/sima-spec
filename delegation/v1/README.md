@@ -3,13 +3,31 @@
 As the delegation section of SIMA spec, this spec describes a way to help delegators publish their announcements to
 show their authority, vote policy, or anything else they want to attract more delegates.
 
+A standard JSON based object is required to describe a delegate's announcement. A delegate can publish his/her
+announcement by submitting the CID of the corresponding announcement object to blockchain, or signing the announcement
+object and submit to a 3rd party which will submit the announcement to blockchain on behalf of him/her.
+
 ## Delegation announcement object
 
-Delegators' description info will be described in a JSON object. Fields include:
+A Delegate's announcement info will be described in a JSON object. Fields include:
 
 - shortDescription: A 180 character preview description.
 - longDescription: A fully customizable Markdown format description of you or your organization.
 - isOrganization: Boolean indicating whether the candidate is an organization.
+- timestamp: Time of this announcement.
+
+An example can be:
+
+```json
+{
+  "shortDescription": "please delegate to me",
+  "longDescription": "please delegate to me",
+  "isOrganization": false,
+  "timestamp": 1712751241940
+}
+```
+
+Its IPFS CID is `bafybeiaulaj2bn7m5iafyyljbaals4i5aqppv4whl73bgdirfoptkw3veu`.
 
 ## User submission
 
@@ -28,17 +46,20 @@ The remark format is `SIMA:D:[VERSION]:S:[DESCRIPTION_OBJECT_CID]`.
 - S: it means submission, and a description json object cid will be followed.
 - DESCRIPTION_OBJECT_CID: it indicates the delegation description JSON object CID.
 
-## Submission by agency
+Using upper section example, the remark text should be
+`SIMA:D:1:S:bafybeiaulaj2bn7m5iafyyljbaals4i5aqppv4whl73bgdirfoptkw3veu`.
+
+## Submission by an agent
 
 An agency, usually a spec implementer, can help users to submit announcements to IPFS and blockchain. It will request a
 JSON object which contains both the delegation announcement object and the corresponding user's signature which we call
-it
-signed description object. The JSON objection format will be:
+it signed description object. The JSON object format will be:
 
 - entity
     - shortDescription
     - longDescription
     - isOrganization
+    - timestamp
 - address
 - signature
 
@@ -47,6 +68,24 @@ mainly 2 differences:
 
 1. The command is `AS` instead of `S` which represents `agent submission`.
 2. The last parameter is the CID of a **signed** description object instead of a raw description object.
+
+Using upper example, the JSON object will be
+
+```json
+{
+  "entity": {
+    "shortDescription": "please delegate to me",
+    "longDescription": "please delegate to me",
+    "isOrganization": false,
+    "timestamp": 1712751241940
+  },
+  "address": "15ifSDJD2wA7XWwDsitFCHu3wsEfkeBESSxkQg3q8sHqAF2R",
+  "signature": "0x9ee721d19e6dac03f04228466f5f60541cd3ee64d20ce22f613b301922dac650cf1fb4aee152856d221d9a81c74ff68a11b709a8551727a20764ce44cd830787"
+}
+```
+
+IPFS CID of this object is `bafybeig4z2mg3kds6d522a3ztutcqhszcxbyf4hs26ylmqyspbqogev5e4`. Then the remark by an agent is
+`SIMA:D:1:AS:bafybeig4z2mg3kds6d522a3ztutcqhszcxbyf4hs26ylmqyspbqogev5e4`.
 
 ## Unset
 
@@ -60,22 +99,44 @@ is `SIMA:D:[VERSION]:U`.
 - U: it means unset current delegation announcement. This directive will take no effect if the extrinsic caller didn't
   publish any announcements before.
 
-## Unset by agency
+## Unset by an agent
 
-An agency can unset a delegator's announcement by submitting a `system#remark` extrinsic, and the remark format should
+An agent can unset a delegate's announcement by submitting a `system#remark` extrinsic, and the remark format should
 be `SIMA:D:[VERSION]:AU:[SIGNED_UNSET_DELEGATION_OBJECT_CID]`.
 
 - `SIMA`, `D` and `[VERSION]` have same meanings described in upper sections.
 - AU: it means `agent unset`, an unset action by an agency.
 - [SIGNED_UNSET_DELEGATION_OBJECT_CID]: it means the CID of a **signed** unset delegation object.
 
-A signed unset delegation object has the following fields:
+Fields of unset delegation announcement object is as follows:
 
-- entity: it should be a string composed of 3 elements. The first one is predefined
-  string `UNSET_DELEGATION_ANNOUNCEMENT`, the 2nd one is a predefined separator `:`, and the third one is an IPFS CID
-  which represents the latest delegation announcement object.
-- address
-- signature: it's the signature to the entity of the address.
+- action: it's a fixed string: `unset-delegation-announcement`.
+- timestamp: time of this action.
+
+An example is:
+
+```json
+{
+  "action": "unset-delegation-announcement",
+  "timestamp": 1712755738457
+}
+```
+
+The signed object example is
+
+```json
+{
+  "entity": {
+    "action": "unset-delegation-announcement",
+    "timestamp": 1712755738457
+  },
+  "address": "15ifSDJD2wA7XWwDsitFCHu3wsEfkeBESSxkQg3q8sHqAF2R",
+  "signature": "0x320947f498aee04d69805e66d83f9e41211fc52c93621d564ce4cca5af382c3fe041900484bbe593af0d896f83b3e3ff1baddf398a94f2e32d67c390b1e4a980"
+}
+```
+
+CID of upper signed object is `bafybeidvlxpgat4ly4wolrhuwttsqjuaxlfvw4tckbvdz35z4wd7lruroa`. So the remark text by an
+agent is `SIMA:D:1:AU:bafybeidvlxpgat4ly4wolrhuwttsqjuaxlfvw4tckbvdz35z4wd7lruroa`.
 
 ## Notes
 
