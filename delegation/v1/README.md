@@ -1,7 +1,7 @@
 # SIMA Delegation
 
 As the delegation section of SIMA spec, this spec describes a way to help delegators publish their announcements to
-show their authority, vote policy, or anything else they want to attract more delegates.
+show their authority, vote policy, or anything else they want to attract more delegations.
 
 A standard JSON based object is required to describe a delegate's announcement. A delegate can publish his/her
 announcement by submitting the CID of the corresponding announcement object to blockchain, or signing the announcement
@@ -9,7 +9,7 @@ object and submit to a 3rd party which will submit the announcement to blockchai
 
 ## Delegation announcement object
 
-A Delegate's announcement info will be described in a JSON object. Fields include:
+A delegate's announcement info will be described in a JSON object whose fields include:
 
 - shortDescription: A 180 character preview description.
 - longDescription: A fully customizable Markdown format description of you or your organization.
@@ -86,6 +86,20 @@ Using upper example, the JSON object will be
 
 IPFS CID of this object is `bafybeig4z2mg3kds6d522a3ztutcqhszcxbyf4hs26ylmqyspbqogev5e4`. Then the remark by an agent is
 `SIMA:D:1:AS:bafybeig4z2mg3kds6d522a3ztutcqhszcxbyf4hs26ylmqyspbqogev5e4`.
+
+## Batch submission by an agent
+
+To save gas consumption, an agent can submit a CID which represent a batch of signed description objects with a
+pre-defined remark format `SIMA:D:[VERSION]:BAS:[CID_OF_MULTIPLE_SIGNED_DESCRIPTION_OBJECT_CID]`.
+
+1. The command is `BAS` which represents `batch agent submission`.
+2. The last parameter is the CID of a JSON array which contains CIDs of a group of signed description objects.
+
+```jsonld=
+[
+  "bafybeig4z2mg3kds6d522a3ztutcqhszcxbyf4hs26ylmqyspbqogev5e4",
+]
+```
 
 ## Unset
 
