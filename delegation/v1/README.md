@@ -87,20 +87,6 @@ Using upper example, the JSON object will be
 IPFS CID of this object is `bafybeig4z2mg3kds6d522a3ztutcqhszcxbyf4hs26ylmqyspbqogev5e4`. Then the remark by an agent is
 `SIMA:D:1:AS:bafybeig4z2mg3kds6d522a3ztutcqhszcxbyf4hs26ylmqyspbqogev5e4`.
 
-## Batch submission by an agent
-
-To save gas consumption, an agent can submit a CID which represent a batch of signed description objects with a
-pre-defined remark format `SIMA:D:[VERSION]:BAS:[CID_OF_MULTIPLE_SIGNED_DESCRIPTION_OBJECT_CID]`.
-
-1. The command is `BAS` which represents `batch agent submission`.
-2. The last parameter is the CID of a JSON array which contains CIDs of a group of signed description objects.
-
-```jsonld=
-[
-  "bafybeig4z2mg3kds6d522a3ztutcqhszcxbyf4hs26ylmqyspbqogev5e4",
-]
-```
-
 ## Unset
 
 Users will submit a `system#remark` extrinsic to cancel the delegation announcement, and the remark format
@@ -151,6 +137,20 @@ The signed object example is
 
 CID of upper signed object is `bafybeidvlxpgat4ly4wolrhuwttsqjuaxlfvw4tckbvdz35z4wd7lruroa`. So the remark text by an
 agent is `SIMA:D:1:AU:bafybeidvlxpgat4ly4wolrhuwttsqjuaxlfvw4tckbvdz35z4wd7lruroa`.
+
+## Batch submission by an agent
+
+To save gas consumption, an agent can submit a CID which represent a batch of signed description objects with a
+pre-defined remark format `SIMA:D:[VERSION]:BAS:[CID_OF_MULTIPLE_SIGNED_DESCRIPTION_OBJECT_CID]`.
+
+1. The command is `BAS` which represents `batch agent submission`.
+2. The last parameter is the CID of a JSON array which contains CIDs of a group of signed description objects.
+
+```jsonld=
+[
+  "bafybeig4z2mg3kds6d522a3ztutcqhszcxbyf4hs26ylmqyspbqogev5e4",
+]
+```
 
 ## Notes
 
