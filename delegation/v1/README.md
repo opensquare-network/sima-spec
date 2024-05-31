@@ -56,6 +56,7 @@ JSON object which contains both the delegation announcement object and the corre
 it signed description object. The JSON object format will be:
 
 - entity
+    - action
     - shortDescription
     - longDescription
     - isOrganization
@@ -74,13 +75,14 @@ Using upper example, the JSON object will be
 ```json
 {
   "entity": {
+    "action": "set-delegation-announcement",
     "shortDescription": "please delegate to me",
     "longDescription": "please delegate to me",
     "isOrganization": false,
     "timestamp": 1712751241940
   },
   "address": "15ifSDJD2wA7XWwDsitFCHu3wsEfkeBESSxkQg3q8sHqAF2R",
-  "signature": "0x9ee721d19e6dac03f04228466f5f60541cd3ee64d20ce22f613b301922dac650cf1fb4aee152856d221d9a81c74ff68a11b709a8551727a20764ce44cd830787"
+  "signature": "0xba2e45a28380835cbf813e4e74831ad8df1c1677fa5a8721b956e10e320a9f7c83fa0dee7a318458a43e18e0fb1c9690f8d333229032118db7b6d9aad8916881"
 }
 ```
 
