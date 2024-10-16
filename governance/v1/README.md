@@ -90,30 +90,32 @@ A council motion proposal example can be:
 
 ## User actions
 
-SIMA governance defines several actions for users to complete an off-chain governance discussion. These actions include:
+There are 2 kinds of posts in a governance platform. One type is discussion post while another is proposal post.
+Different types of posts will have different types of actions. Every action will have a unique id which will be used in
+the signed data.
 
-- Start a discussion
-- Append a discussion
-- Provide context
-- Comment
-- Upvote/downvote
-- Cancel upvote/downvote
+For discussion posts, user actions are shown in following table.
 
-Every action will have a unique id which will be used in the signed data, shown in following table.
+| Action              | Id                |
+|---------------------|-------------------|
+| Start a discussion  | new_discussion    |
+| Append a discussion | append_discussion |
+| Comment             | comment           |
+| Replace a comment   | replace_comment   |
+| Upvote              | upvote            |
+| Downvote            | downvote          |
+| Cancel upvote       | cancel_upvote     |
+| Cancel downvote     | cancel_downvote   |
+
+For proposal posts, user actions are shown in following table.
 
 | Action                     | Id                       |
 |----------------------------|--------------------------|
-| Start a discussion         | new_discussion           |
-| Append a discussion        | append_discussion        |
 | Provide context            | provide_context          |
 | Comment a proposal         | comment_proposal         |
 | Replace a proposal comment | replace_proposal_comment |
-| Comment                    | comment                  |
-| Replace a comment          | replace_comment          |
 | Upvote a proposal          | upvote_proposal          |
-| Upvote                     | upvote                   |
 | Downvote a proposal        | downvote_proposal        |
-| Downvote                   | downvote                 |
 | Cancel upvote              | cancel_upvote            |
 | Cancel downvote            | cancel_downvote          |
 
