@@ -109,15 +109,18 @@ For discussion posts, user actions are shown in following table.
 
 For proposal posts, user actions are shown in following table.
 
-| Action                     | Id                       |
-|----------------------------|--------------------------|
-| Provide context            | provide_context          |
-| Comment a proposal         | comment_proposal         |
-| Replace a proposal comment | replace_proposal_comment |
-| Upvote a proposal          | upvote_proposal          |
-| Downvote a proposal        | downvote_proposal        |
-| Cancel upvote              | cancel_upvote            |
-| Cancel downvote            | cancel_downvote          |
+| Action              | Id                |
+|---------------------|-------------------|
+| Provide context     | provide_context   |
+| Comment a proposal  | comment_proposal  |
+| Upvote a proposal   | upvote_proposal   |
+| Downvote a proposal | downvote_proposal |
+| Comment             | comment           |
+| Replace a comment   | replace_comment   |
+| Upvote              | upvote            |
+| Downvote            | downvote          |
+| Cancel upvote       | cancel_upvote     |
+| Cancel downvote     | cancel_downvote   |
 
 ### Action object
 
@@ -158,239 +161,20 @@ Terminology:
 
 - If A set a proxy to B, then B is the proxy(delegate) account, and A is the proxied account.
 
-### Start a discussion
+### Discussion specific actions
 
-Any community member with a polkadot key can start a discussion. An example of the action data to be signed is shown as
-follows.
+Discussion specific actions include `new_discussion` and `append_discussion`. Please check details of these
+actions [here](./actions/discussion.md).
 
-```jsonld=
-{
-  "action": "new_discussion",
-  "title": "discussion title",
-  "content": "discussion content",
-  "content_format": "subsquare_md",
-  "timestamp": 1680592723149
-}
-```
+### Proposal specific actions
 
-- action: every action should have this field. It indicates the action type.
-- title: title of the discussion. It should not be empty, and spec implemeters should reject data with empty title.
-- content: content of the discussion, should be decoded by the way indicated by `content_format` field.
-- content_format: it indicates the format of discussion content. At the time of writting, the formats
-  contains `subsquare_md` and `HTML`. `subsquare_md` means subsquare supported markdown. `HTML` means
-  just [HTML](https://en.wikipedia.org/wiki/HTML).
-- timestamp: time of discussion created time. Spec implementers should not accept a user submit a discussion with a
-  timestamp much earlier or later than current time.
+Discussion specific actions include `provide_context`, `comment_proposal`, `upvote_proposal` and `downvote_proposal`.
+Please check details of these actions [here](./actions/proposal.md).
 
-Data should be signed before submitting to spec implementers. The signed data which will be submitted is as follows.
+#### Common actions
 
-```jsonld=
-{
-  "entity": {
-    "action": "new_discussion",
-    "title": "discussion title",
-    "content": "discussion content",
-    "content_format": "subsquare_md",
-    "timestamp": 1680592723149
-  },
-  "address": "15ifSDJD2wA7XWwDsitFCHu3wsEfkeBESSxkQg3q8sHqAF2R",
-  "signature": "0xa8d02f1744f9ed551fc62e9f41ae2e997c86642a96cad818dca666353a8e4e22ec7c6b6369167d050b58840a12c34a06324e14163705605a388d976acee58384"
-}
-```
-
-IPFS CID of the signed data is `bafybeicx6lf2ppu7qealce55maanaefwdiej3ogms2j5yivllz2p7iujle`. A discussion can be
-identified by this CID.
-
-### Append a discussion
-
-A discussion author may need to amend the content due to typos, wrong calculations, outdated numbers, etc. But amending
-the content directly will change the IPFS CID, so we will support append content to a discussion instead of amending the
-legacy content.
-
-```jsonld=
-{
-  "action": "append_discussion",
-  "CID": "bafybeicx6lf2ppu7qealce55maanaefwdiej3ogms2j5yivllz2p7iujle",
-  "content": "appended discussion content",
-  "content_format": "subsquare_md",
-  "timestamp": 1680598637950
-}
-```
-
-CID field value should be the CID of the target discussion data CID. Other fields keeps same meaning with those of the
-action 'start a discussion'. The whole action data should also include `address` and `signature` fields.
-
-Note:
-
-- The address should be same with that of the `start a discussion` action.
-
-### Provide context
-
-This action provide context information for an on-chain proposal. This action author should be the proposal author. An
-example of this action entity data is shown as follows.
-
-```jsonld=
-{
-  "action": "provide_context",
-  "indexer": {
-    "pallet": "treasury",
-    "object": "proposals",
-    "proposed_height": 9438552,
-    "id": 100
-  },
-  "title": "proposal title",
-  "content": "proposal content",
-  "content_format": "subsquare_md",
-  "timestamp": 1680601098763
-}
-```
-
-- `indexer` field is a [proposal indexer](#proposal-indexer) for locating a specific on-chain proposal. It will follow
-  the definition described in the proposal indexer section.
-
-The whole action data should also include `address` and `signature` fields.
-
-Note:
-
-- A new valid action updating same proposal will override the content by previous actions.
-
-### Comment a proposal
-
-This action leaves a comment to an on-chain proposal. An example of this action entity data is shown as follows.
-
-```jsonld=
-{
-  "action": "comment_proposal",
-  "indexer": {
-    "pallet": "treasury",
-    "object": "proposals",
-    "proposed_height": 9438552,
-    "id": 100
-  },
-  "content": "proposal comment",
-  "content_format": "subsquare_md",
-  "timestamp": 1680615958881
-}
-```
-
-### Replace a proposal comment
-
-Editing a comment is not supported directly in SIMA spec. This action replaces an existed proposal comment. An example
-of this action entity data is shown as follows.
-
-```jsonld=
-{
-  "action": "replace_proposal_comment",
-  "indexer": {
-    "pallet": "treasury",
-    "object": "proposals",
-    "proposed_height": 9438552,
-    "id": 100
-  },
-  "old_comment_cid": "bafybeicx6lf2ppu7qealce55maanaefwdiej3ogms2j5yivllz2p7iujle",
-  "content": "new proposal comment",
-  "content_format": "subsquare_md",
-  "timestamp": 1680615958881
-}
-```
-
-- old_comment_cid: it indicates the old proposal comment CID which will be replaced.
-
-### Comment
-
-The comment action leaves a comment to a discussion or another comment. An example of this action entity data is shown
-as follows.
-
-```jsonld=
-{
-  "action": "comment",
-  "cid": "bafybeicx6lf2ppu7qealce55maanaefwdiej3ogms2j5yivllz2p7iujle",
-  "content": "dicussion comment content",
-  "content_format": "subsquare_md",
-  "timestamp": 1680615958881
-}
-```
-
-- cid: it indicates the target action this comment is responding to. The target action can be a discussion, or another
-  comment.
-
-Note:
-
-- SIMA spec don't support 3rd level comments which means we can leave a comment to a proposal or discussion comment, but
-  not a comment of another comment.
-
-### Replace a comment
-
-Editing a discussion comment is not supported directly in SIMA spec. This action replaces an existed discussion comment.
-An example of this action entity data is shown as follows.
-
-```jsonld=
-{
-  "action": "replace_comment",
-  "cid": "bafybeicx6lf2ppu7qealce55maanaefwdiej3ogms2j5yivllz2p7iujle",
-  "old_comment_cid": "bafybeid7ktyoum7lzugefurchc4hxveqbohtus5lkibanxjiaodgmlqhve",
-  "content": "dicussion new comment content",
-  "content_format": "subsquare_md",
-  "timestamp": 1680615958881
-}
-```
-
-- cid: it indicates the target action this old comment is responding to. The target action can be a discussion, or
-  another comment.
-- old_comment_cid: it indicates the CID of old comment to be replaced.
-
-### Upvote/downvote a proposal
-
-This action's target is same with that of the `comment_proposal` action, and the target is an onchain proposal. An
-example entity is shown as follows.
-
-```jsonld=
-{
-  "action": "upvote_proposal",
-  "indexer": {
-    "pallet": "treasury",
-    "object": "proposals",
-    "proposed_height": 9438552,
-    "id": 100
-  },
-  "timestamp": 1680686606947
-}
-```
-
-### Upvote/downvote
-
-This action's target is same with that of the comment action, and the target maybe a discussion or another comment. An
-example entity is shown as follows.
-
-```jsonld=
-{
-  "action": "upvote",
-  "cid": "bafybeicx6lf2ppu7qealce55maanaefwdiej3ogms2j5yivllz2p7iujle"
-  "timestamp": 1680686606947
-}
-```
-
-- cid: it indicates the target action this action is responding to. The target action can be a discussion, or a comment.
-
-### Cancel upvote/downvote
-
-This action's target is same with that of upvote/downvote action. An example entity is shown as follows.
-
-```jsonld=
-{
-  "action": "cancel_upvote",
-  "cid": "bafybeicx6lf2ppu7qealce55maanaefwdiej3ogms2j5yivllz2p7iujle"
-  "timestamp": 1681873995303
-}
-```
-
-- `action` field can be `cancel_upvote` or `cancel_downvote`.
-- `cid` means the corresponding upvote/downvote/upvote_proposal/downvote_proposal action cid.
-
-Note:
-
-- If there is no corresponding upvote/downvote/upvote_proposal/downvote_proposal for same target from same address, this
-  action won't take any effect.
+Common actions include `comment`, `replace_comment`, `upvote`, `downvote`, `cancel_upvote` and `cancel_downvote`. Please
+check details of these actions [here](./actions/proposal.md).
 
 ## Decentralization
 
