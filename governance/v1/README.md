@@ -101,19 +101,21 @@ SIMA governance defines several actions for users to complete an off-chain gover
 
 Every action will have a unique id which will be used in the signed data, shown in following table.
 
-| Action              | Id                |
-|---------------------|-------------------|
-| Start a discussion  | new_discussion    |
-| Append a discussion | append_discussion |
-| Provide context     | provide_context   |
-| Comment a proposal  | comment_proposal  |
-| Comment             | comment           |
-| Upvote a proposal   | upvote_proposal   |
-| Upvote              | upvote            |
-| Downvote a proposal | downvote_proposal |
-| Downvote            | downvote          |
-| Cancel upvote       | cancel_upvote     |
-| Cancel downvote     | cancel_downvote   |
+| Action                     | Id                       |
+|----------------------------|--------------------------|
+| Start a discussion         | new_discussion           |
+| Append a discussion        | append_discussion        |
+| Provide context            | provide_context          |
+| Comment a proposal         | comment_proposal         |
+| Replace a proposal comment | replace_proposal_comment |
+| Comment                    | comment                  |
+| Replace a comment          | replace_comment          |
+| Upvote a proposal          | upvote_proposal          |
+| Upvote                     | upvote                   |
+| Downvote a proposal        | downvote_proposal        |
+| Downvote                   | downvote                 |
+| Cancel upvote              | cancel_upvote            |
+| Cancel downvote            | cancel_downvote          |
 
 ### Action object
 
@@ -269,6 +271,29 @@ This action leaves a comment to an on-chain proposal. An example of this action 
 }
 ```
 
+### Replace a proposal comment
+
+Editing a comment is not supported directly in SIMA spec. This action replaces an existed proposal comment. An example
+of this action entity data is shown as follows.
+
+```jsonld=
+{
+  "action": "replace_proposal_comment",
+  "indexer": {
+    "pallet": "treasury",
+    "object": "proposals",
+    "proposed_height": 9438552,
+    "id": 100
+  },
+  "old_comment_cid": "bafybeicx6lf2ppu7qealce55maanaefwdiej3ogms2j5yivllz2p7iujle",
+  "content": "new proposal comment",
+  "content_format": "subsquare_md",
+  "timestamp": 1680615958881
+}
+```
+
+- old_comment_cid: it indicates the old proposal comment CID which will be replaced.
+
 ### Comment
 
 The comment action leaves a comment to a discussion or another comment. An example of this action entity data is shown
@@ -278,7 +303,7 @@ as follows.
 {
   "action": "comment",
   "cid": "bafybeicx6lf2ppu7qealce55maanaefwdiej3ogms2j5yivllz2p7iujle",
-  "content": "proposal content",
+  "content": "dicussion comment content",
   "content_format": "subsquare_md",
   "timestamp": 1680615958881
 }
@@ -291,6 +316,26 @@ Note:
 
 - SIMA spec don't support 3rd level comments which means we can leave a comment to a proposal or discussion comment, but
   not a comment of another comment.
+
+### Replace a comment
+
+Editing a discussion comment is not supported directly in SIMA spec. This action replaces an existed discussion comment.
+An example of this action entity data is shown as follows.
+
+```jsonld=
+{
+  "action": "replace_comment",
+  "cid": "bafybeicx6lf2ppu7qealce55maanaefwdiej3ogms2j5yivllz2p7iujle",
+  "old_comment_cid": "bafybeid7ktyoum7lzugefurchc4hxveqbohtus5lkibanxjiaodgmlqhve",
+  "content": "dicussion new comment content",
+  "content_format": "subsquare_md",
+  "timestamp": 1680615958881
+}
+```
+
+- cid: it indicates the target action this old comment is responding to. The target action can be a discussion, or
+  another comment.
+- old_comment_cid: it indicates the CID of old comment to be replaced.
 
 ### Upvote/downvote a proposal
 
