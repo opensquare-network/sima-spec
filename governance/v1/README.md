@@ -174,7 +174,7 @@ Please check details of these actions [here](./actions/proposal.md).
 #### Common actions
 
 Common actions include `comment`, `replace_comment`, `upvote`, `downvote`, `cancel_upvote` and `cancel_downvote`. Please
-check details of these actions [here](./actions/proposal.md).
+check details of these actions [here](./actions/common.md).
 
 ## Decentralization
 
