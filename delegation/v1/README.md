@@ -29,6 +29,9 @@ An example can be:
 
 Its IPFS CID is `bafybeiaulaj2bn7m5iafyyljbaals4i5aqppv4whl73bgdirfoptkw3veu`.
 
+There is an optional `real` field to help an account to set delegation announcement on behalf of another account. Please
+check details [here](../../common/authority.md).
+
 ## User submission
 
 Users can publish their delegations announcements on chain by themselves. What they need to do is:

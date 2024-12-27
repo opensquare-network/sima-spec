@@ -57,6 +57,9 @@ The signed JSON object example is:
 }
 ```
 
+There is an optional `real` field in entity to help an account to set an avatar on behalf of another account. Please
+check details [here](../../common/authority.md).
+
 CID of upper signed object is `bafkreiemydsjywubt62lk7s4w5bzkylmhqkoeyhypdaaqhphxbsmtllfiq`. The remark text by an agent
 is `SIMA:A:1:AS:bafybeidvlxpgat4ly4wolrhuwttsqjuaxlfvw4tckbvdz35z4wd7lruroa`.
 
@@ -95,6 +98,9 @@ An example of the entity JSON object can be:
 }
 ```
 
+There is an optional `real` field to help an account to unset the avatar on behalf of another account. Please check
+details [here](../../common/authority.md).
+
 The signed JSON object example is:
 
 ```json
@@ -120,7 +126,7 @@ agent is `SIMA:A:1:AU:bafkreie42easioag2shgdozwgitvey5gjq7wr3jn24xohuwmipdlwyemp
 To save gas consumption, an agent can submit a CID which represent a batch of signed description objects with a
 pre-defined remark format `SIMA:A:[VERSION]:BAS:[CID_OF_MULTIPLE_SIGNED_DESCRIPTION_OBJECT_CID]`.
 
-An example of JSON with multiple CIDs of avatar related behavior JSON objects is as follows. 
+An example of JSON with multiple CIDs of avatar related behavior JSON objects is as follows.
 
 ```json
 [
