@@ -128,8 +128,11 @@ Action object is a JSON object describing a user's action. An action object will
 
 - entity: it describes the action type and content. Different action entities will have different fields.
 - address: it indicates the action author who will sign the action entity.
-- signature: signature of the address to the entity object. Signature should be calculated
-  by `polkadot_key_sign(JSON.stringify(entity))`.
+- signature: The signature must validate against either of the following payloads:
+  - polkadot_key_sign(JSON.stringify(entity))
+  - polkadot_key_sign(blake2_as_hex(JSON.stringify(entity)))
+  
+  A signature is considered valid if at least one of the above verifications succeeds.
 
 We will describe entities for various actions in following sections.
 
